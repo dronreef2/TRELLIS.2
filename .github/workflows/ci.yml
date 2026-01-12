@@ -83,7 +83,9 @@ jobs:
     - name: Run Bandit security scan
       run: |
         # Run security checks on Python code
+        # First: Generate JSON report for artifact upload
         bandit -r trellis2 -f json -o bandit-report.json
+        # Second: Display results in console for quick viewing
         bandit -r trellis2
       continue-on-error: true
     
