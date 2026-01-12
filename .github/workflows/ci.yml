@@ -46,7 +46,8 @@ jobs:
     - name: Run Ruff linter
       run: |
         # Run ruff with default rules, showing all issues
-        ruff check . --output-format=github || true
+        ruff check . --output-format=github
+      continue-on-error: true
     
     - name: Check Python syntax
       run: |
@@ -56,7 +57,7 @@ jobs:
     - name: Check code formatting with Black
       run: |
         # Check if code follows Black formatting (non-blocking)
-        black --check --diff . || true
+        black --check --diff .
       continue-on-error: true
 
   security:
@@ -82,8 +83,8 @@ jobs:
     - name: Run Bandit security scan
       run: |
         # Run security checks on Python code
-        bandit -r trellis2 -f json -o bandit-report.json || true
-        bandit -r trellis2 || true
+        bandit -r trellis2 -f json -o bandit-report.json
+        bandit -r trellis2
       continue-on-error: true
     
     - name: Upload Bandit report
