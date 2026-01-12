@@ -30,8 +30,9 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/setup.sh') }}
+        key: ${{ runner.os }}-pip-lint-${{ hashFiles('.github/workflows/ci.yml') }}
         restore-keys: |
+          ${{ runner.os }}-pip-lint-
           ${{ runner.os }}-pip-
     
     - name: Install linting dependencies
@@ -47,12 +48,7 @@ jobs:
     - name: Check Python syntax
       run: |
         # Compile all Python files to check for syntax errors
-        python -m py_compile app.py
-        python -m py_compile app_texturing.py
-        python -m py_compile example.py
-        python -m py_compile example_texturing.py
-        python -m py_compile train.py
-        find trellis2 -name "*.py" -exec python -m py_compile {} \;
+        find . -name "*.py" -not -path "./.git/*" -not -path "./o-voxel/*" -exec python -m py_compile {} \;
     
     - name: Check code formatting with Black
       run: |

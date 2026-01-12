@@ -7,7 +7,7 @@
 <a href="https://huggingface.co/spaces/microsoft/TRELLIS.2"><img src="https://img.shields.io/badge/Hugging%20Face-Demo-blueviolet"></a>
 <a href="https://microsoft.github.io/TRELLIS.2"><img src="https://img.shields.io/badge/Project-Website-blue" alt="Project Page"></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green" alt="License"></a>
-<img src="https://github.com/dronreef2/TRELLIS.2/actions/workflows/ci.yml/badge.svg" alt="CI Status">
+<a href="https://github.com/dronreef2/TRELLIS.2/actions"><img src="https://github.com/dronreef2/TRELLIS.2/actions/workflows/ci.yml/badge.svg" alt="CI Status"></a>
 
 https://github.com/user-attachments/assets/63b43a7e-acc7-4c81-a900-6da450527d8f
 
