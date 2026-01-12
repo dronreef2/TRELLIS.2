@@ -7,7 +7,7 @@
 <a href="https://huggingface.co/spaces/microsoft/TRELLIS.2"><img src="https://img.shields.io/badge/Hugging%20Face-Demo-blueviolet"></a>
 <a href="https://microsoft.github.io/TRELLIS.2"><img src="https://img.shields.io/badge/Project-Website-blue" alt="Project Page"></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green" alt="License"></a>
-<img src="https://github.com/dronreef2/TRELLIS.2/workflows/CI/badge.svg" alt="CI Status">
+<img src="https://github.com/dronreef2/TRELLIS.2/actions/workflows/ci.yml/badge.svg" alt="CI Status">
 
 https://github.com/user-attachments/assets/63b43a7e-acc7-4c81-a900-6da450527d8f
 
@@ -303,7 +303,7 @@ Higher-resolution fine-tuning can be performed by updating the `finetune_ckpt` f
 ### Continuous Integration
 
 This repository includes a GitHub Actions CI workflow that automatically:
-- **Lints Python code** using Ruff and Flake8 across multiple Python versions (3.8-3.11)
+- **Lints Python code** using Ruff across multiple Python versions (3.8-3.11)
 - **Validates Python syntax** to catch errors early
 - **Scans for security issues** using Bandit
 - **Checks code formatting** with Black (informational)

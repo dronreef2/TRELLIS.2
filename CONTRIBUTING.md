@@ -41,7 +41,7 @@ Before submitting a pull request, ensure your code:
 
 All pull requests automatically run through our CI pipeline which:
 - Tests code on Python 3.8, 3.9, 3.10, and 3.11
-- Runs linting checks with Ruff and Flake8
+- Runs linting checks with Ruff
 - Validates Python syntax
 - Performs security scanning with Bandit
 - Checks code formatting with Black
