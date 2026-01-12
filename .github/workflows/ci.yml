@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Lint Python Code
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Cache pip packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/setup.sh') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install linting dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install ruff black flake8
+    
+    - name: Run Ruff linter
+      run: |
+        # Run ruff with default rules, showing all issues
+        ruff check . --output-format=github || true
+    
+    - name: Check Python syntax
+      run: |
+        # Compile all Python files to check for syntax errors
+        python -m py_compile app.py
+        python -m py_compile app_texturing.py
+        python -m py_compile example.py
+        python -m py_compile example_texturing.py
+        python -m py_compile train.py
+        find trellis2 -name "*.py" -exec python -m py_compile {} \;
+    
+    - name: Check code formatting with Black
+      run: |
+        # Check if code follows Black formatting (non-blocking)
+        black --check --diff . || true
+      continue-on-error: true
+
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+    
+    - name: Install bandit
+      run: |
+        python -m pip install --upgrade pip
+        pip install bandit[toml]
+    
+    - name: Run Bandit security scan
+      run: |
+        # Run security checks on Python code
+        bandit -r trellis2 -f json -o bandit-report.json || true
+        bandit -r trellis2 || true
+      continue-on-error: true
+    
+    - name: Upload Bandit report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: bandit-security-report
+        path: bandit-report.json
+        retention-days: 30
