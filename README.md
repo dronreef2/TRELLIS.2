@@ -7,6 +7,7 @@
 <a href="https://huggingface.co/spaces/microsoft/TRELLIS.2"><img src="https://img.shields.io/badge/Hugging%20Face-Demo-blueviolet"></a>
 <a href="https://microsoft.github.io/TRELLIS.2"><img src="https://img.shields.io/badge/Project-Website-blue" alt="Project Page"></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green" alt="License"></a>
+<a href="https://github.com/dronreef2/TRELLIS.2/actions"><img src="https://github.com/dronreef2/TRELLIS.2/actions/workflows/ci.yml/badge.svg" alt="CI Status"></a>
 
 https://github.com/user-attachments/assets/63b43a7e-acc7-4c81-a900-6da450527d8f
 
@@ -296,6 +297,26 @@ Higher-resolution fine-tuning can be performed by updating the `finetune_ckpt` f
 * `slat_flow_img2shape_dit_1_3B_512_bf16_ft1024.json`
 * `slat_flow_imgshape2tex_dit_1_3B_512_bf16_ft1024.json`
 
+
+## 🔧 Development
+
+### Continuous Integration
+
+This repository includes a GitHub Actions CI workflow that automatically:
+- **Lints Python code** using Ruff across multiple Python versions (3.8-3.11)
+- **Validates Python syntax** to catch errors early
+- **Scans for security issues** using Bandit
+- **Checks code formatting** with Black (informational)
+
+The CI runs on every push to `main` and on all pull requests. You can also trigger it manually via the Actions tab.
+
+### Contributing
+
+When contributing to this project:
+1. Ensure your code passes the CI checks
+2. Run `python -m py_compile` on your files to check for syntax errors
+3. Consider using `ruff` locally for linting: `pip install ruff && ruff check .`
+4. Follow the existing code style and conventions
 
 ## 🧩 Related Packages
 
